@@ -5,6 +5,12 @@ export const GridArabicos = () => {
   const [numberTyped, setNumberTyped] = useState("");
   const [response, setResponse] = useState("Resposta");
 
+  let milhar = 0;
+  let centena = 0;
+  let dezena = 0;
+  let unidade = 0;
+  let arrayConvertednumber = [];
+
   const clicked = (value) => {
     setNumberTyped(numberTyped + value);
   };
@@ -13,123 +19,76 @@ export const GridArabicos = () => {
     setResponse("Resposta");
   };
 
-  const convert = () => {
+  const convertMilhar = (number, position) => {
+    arrayConvertednumber[position] = "M".repeat(number);
+  };
+
+  const convertCentena = (number, position) => {
+    if (number < 4) {
+      arrayConvertednumber[position] = "C".repeat(number);
+    } else if (number == 4) {
+      arrayConvertednumber[position] = "CD";
+    } else if (number > 4 && number < 9) {
+      arrayConvertednumber[position] = "D" + "C".repeat(number - 5);
+    } else {
+      arrayConvertednumber[position] = "CM";
+    }
+  };
+
+  const convertDezena = (number, position) => {
+    if (number < 4) {
+      arrayConvertednumber[position] = "X".repeat(number);
+    } else if (number == 4) {
+      arrayConvertednumber[position] = "XL";
+    } else if (number > 4 && number < 9) {
+      arrayConvertednumber[position] = "L" + "X".repeat(number - 5);
+    } else {
+      arrayConvertednumber[position] = "XC";
+    }
+  };
+
+  const convertUnidade = (number, position) => {
+    if (number < 4) {
+      arrayConvertednumber[position] = "I".repeat(number);
+    } else if (number == 4) {
+      arrayConvertednumber[position] = "IV";
+    } else if (number > 4 && number < 9) {
+      arrayConvertednumber[position] = "V" + "I".repeat(number - 5);
+    } else {
+      arrayConvertednumber[position] = "IX";
+    }
+  };
+
+  const convertNumber = () => {
     if (numberTyped > 0 && numberTyped < 4000) {
       let numberTypedClean = parseInt(numberTyped);
       let stringNumberTyped = numberTypedClean.toString();
       let arrayNumberTyped = stringNumberTyped.split("");
-      let milhar = 0;
-      let centena = 0;
-      let dezena = 0;
-      let unidade = 0;
-      let arrayConvertednumber = [];
 
       if (arrayNumberTyped.length === 4) {
         milhar = arrayNumberTyped[0];
         centena = arrayNumberTyped[1];
         dezena = arrayNumberTyped[2];
         unidade = arrayNumberTyped[3];
-
-        arrayConvertednumber[0] = "M".repeat(milhar);
-
-        if (centena < 4) {
-          arrayConvertednumber[1] = "C".repeat(centena);
-        } else if (centena == 4) {
-          arrayConvertednumber[1] = "CD";
-        } else if (centena > 4 && centena < 9) {
-          arrayConvertednumber[1] = "D" + "C".repeat(centena - 5);
-        } else {
-          arrayConvertednumber[1] = "CM";
-        }
-
-        if (dezena < 4) {
-          arrayConvertednumber[2] = "X".repeat(dezena);
-        } else if (dezena == 4) {
-          arrayConvertednumber[2] = "XL";
-        } else if (dezena > 4 && dezena < 9) {
-          arrayConvertednumber[2] = "L" + "X".repeat(dezena - 5);
-        } else {
-          arrayConvertednumber[2] = "XC";
-        }
-
-        if (unidade < 4) {
-          arrayConvertednumber[3] = "I".repeat(unidade);
-        } else if (unidade == 4) {
-          arrayConvertednumber[3] = "IV";
-        } else if (unidade > 4 && unidade < 9) {
-          arrayConvertednumber[3] = "V" + "I".repeat(unidade - 5);
-        } else {
-          arrayConvertednumber[3] = "IX";
-        }
+        convertMilhar(milhar, 0);
+        convertCentena(centena, 1);
+        convertDezena(dezena, 2);
+        convertUnidade(unidade, 3);
       } else if (arrayNumberTyped.length === 3) {
         centena = arrayNumberTyped[0];
         dezena = arrayNumberTyped[1];
         unidade = arrayNumberTyped[2];
-
-        if (centena < 4) {
-          arrayConvertednumber[0] = "C".repeat(centena);
-        } else if (centena == 4) {
-          arrayConvertednumber[0] = "CD";
-        } else if (centena > 4 && centena < 9) {
-          arrayConvertednumber[0] = "D" + "C".repeat(centena - 5);
-        } else {
-          arrayConvertednumber[0] = "CM";
-        }
-
-        if (dezena < 4) {
-          arrayConvertednumber[1] = "X".repeat(dezena);
-        } else if (dezena == 4) {
-          arrayConvertednumber[1] = "XL";
-        } else if (dezena > 4 && dezena < 9) {
-          arrayConvertednumber[1] = "L" + "X".repeat(dezena - 5);
-        } else {
-          arrayConvertednumber[1] = "XC";
-        }
-
-        if (unidade < 4) {
-          arrayConvertednumber[2] = "I".repeat(unidade);
-        } else if (unidade == 4) {
-          arrayConvertednumber[2] = "IV";
-        } else if (unidade > 4 && unidade < 9) {
-          arrayConvertednumber[2] = "V" + "I".repeat(unidade - 5);
-        } else {
-          arrayConvertednumber[2] = "IX";
-        }
+        convertCentena(centena, 0);
+        convertDezena(dezena, 1);
+        convertUnidade(unidade, 2);
       } else if (arrayNumberTyped.length === 2) {
         dezena = arrayNumberTyped[0];
         unidade = arrayNumberTyped[1];
-
-        if (dezena < 4) {
-          arrayConvertednumber[0] = "X".repeat(dezena);
-        } else if (dezena == 4) {
-          arrayConvertednumber[0] = "XL";
-        } else if (dezena > 4 && dezena < 9) {
-          arrayConvertednumber[0] = "L" + "X".repeat(dezena - 5);
-        } else {
-          arrayConvertednumber[0] = "XC";
-        }
-
-        if (unidade < 4) {
-          arrayConvertednumber[1] = "I".repeat(unidade);
-        } else if (unidade == 4) {
-          arrayConvertednumber[1] = "IV";
-        } else if (unidade > 4 && unidade < 9) {
-          arrayConvertednumber[1] = "V" + "I".repeat(unidade - 5);
-        } else {
-          arrayConvertednumber[1] = "IX";
-        }
+        convertDezena(dezena, 0);
+        convertUnidade(unidade, 1);
       } else {
         unidade = arrayNumberTyped[0];
-
-        if (unidade < 4) {
-          arrayConvertednumber[0] = "I".repeat(unidade);
-        } else if (unidade == 4) {
-          arrayConvertednumber[0] = "IV";
-        } else if (unidade > 4 && unidade < 9) {
-          arrayConvertednumber[0] = "V" + "I".repeat(unidade - 5);
-        } else {
-          arrayConvertednumber[0] = "IX";
-        }
+        convertUnidade(unidade, 0);
       }
 
       setResponse(arrayConvertednumber.join(""));
@@ -179,7 +138,7 @@ export const GridArabicos = () => {
         <div className={styles.number}>
           {numberTyped ? numberTyped : "Digite um número"}
         </div>
-        <button onClick={convert} className={styles.button}>
+        <button onClick={convertNumber} className={styles.button}>
           Converter
         </button>
         <button onClick={clean} className={styles.button}>
