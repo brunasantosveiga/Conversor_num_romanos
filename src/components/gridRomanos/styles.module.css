@@ -27,9 +27,10 @@
 }
 .warning {
   margin-bottom: 10px;
-  color: #04539e;
+  color: rgb(231, 8, 8);
   text-align: center;
 }
+
 .divConvert {
   display: flex;
   justify-content: center;
