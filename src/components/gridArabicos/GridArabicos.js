@@ -59,7 +59,7 @@ export const GridArabicos = () => {
     }
   };
 
-  const convertNumber = () => {
+  const convert = () => {
     if (numberTyped > 0 && numberTyped < 4000) {
       let numberTypedClean = parseInt(numberTyped);
       let stringNumberTyped = numberTypedClean.toString();
@@ -138,7 +138,7 @@ export const GridArabicos = () => {
         <div className={styles.number}>
           {numberTyped ? numberTyped : "Digite um número"}
         </div>
-        <button onClick={convertNumber} className={styles.button}>
+        <button onClick={convert} className={styles.button}>
           Converter
         </button>
         <button onClick={clean} className={styles.button}>

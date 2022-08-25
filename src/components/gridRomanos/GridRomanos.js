@@ -75,7 +75,6 @@ export const GridRomanos = () => {
 
   const clicked = (value) => {
     setNumberTyped(() => [...numberTyped, value]);
-    // convert();
   };
 
   const clean = () => {
