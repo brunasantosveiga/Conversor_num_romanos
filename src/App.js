@@ -4,8 +4,8 @@ import { GridRomanos } from "./components/gridRomanos/GridRomanos";
 import { GridArabicos } from "./components/gridArabicos/GridArabicos.js";
 
 function App() {
-  const [romanos, setRomanos] = useState(true);
-  const [arabicos, setArabicos] = useState(false);
+  const [romanos, setRomanos] = useState(false);
+  const [arabicos, setArabicos] = useState(true);
 
   const gridRomanos = () => {
     setArabicos(false);
